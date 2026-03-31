@@ -1,0 +1,13 @@
+{
+  "name": "reporting-mensuel-france-services",
+  "version": "1.0.0",
+  "description": "Application de reporting mensuel France Services avec sauvegarde serveur et impression PDF",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "express": "^4.21.2"
+  }
+}
