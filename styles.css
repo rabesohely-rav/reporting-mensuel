@@ -1,0 +1,444 @@
+:root {
+  --blue: #2f73b7;
+  --yellow: #f0c419;
+  --purple: #6c3f8e;
+  --green: #00a651;
+  --text: #222;
+  --muted: #666;
+  --bg: #edf1f4;
+  --paper: #fff;
+  --line: #111;
+  --zero-bg: #ececec;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app-shell { width: min(1280px, 96%); margin: 20px auto 40px; }
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.app-header h1 { margin: 0 0 4px; font-size: 30px; }
+.app-header p { margin: 0; color: var(--muted); }
+.header-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  background: #1f2937;
+  color: #fff;
+}
+.secondary { background: #6b7280; }
+.success { background: #2e7d32; }
+.page-form, .report-page {
+  background: var(--paper);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,.12);
+}
+.page-form { padding: 22px; margin-bottom: 24px; }
+.card {
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 16px;
+}
+.intro-card { margin-bottom: 16px; }
+.intro-card h2 { margin: 0 0 10px; }
+.intro-card p { margin: 0; line-height: 1.55; }
+.intro-card span { display: block; }
+.form-grid-top {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.form-grid-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.full-width { grid-column: 1 / -1; }
+label { display: block; font-weight: 700; margin-bottom: 8px; }
+input, textarea {
+  width: 100%;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  padding: 12px;
+  font: inherit;
+  background: #fff;
+}
+textarea { min-height: 180px; resize: vertical; line-height: 1.45; }
+.status, .save-feedback {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.status.ok, .save-feedback.ok { color: #2e7d32; }
+.status.error, .save-feedback.error { color: #c62828; }
+.status.warn, .save-feedback.warn { color: #9a6700; }
+.year-table-wrap { overflow-x: auto; }
+.editor-table td:first-child { font-weight: 700; }
+.editor-table input { min-width: 80px; }
+.print-area {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.report-page {
+  width: 210mm;
+  height: 297mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  padding: 10mm 12mm 10mm 12mm;
+  position: relative;
+  overflow: hidden;
+}
+.report-header {
+  display: grid;
+  grid-template-columns: 20mm 1fr 20mm;
+  gap: 8px;
+  align-items: start;
+  min-height: 22mm;
+}
+.logo-fs { width: 18mm; height: auto; object-fit: contain; }
+.report-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 5.3mm;
+  line-height: 1.25;
+  padding-top: 2mm;
+}
+.report-band {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  margin-top: 3mm;
+  border: 0.7mm solid #111;
+}
+.report-band-left, .report-band-right {
+  padding: 4.1mm 3mm;
+  text-align: center;
+  font-weight: 700;
+  font-size: 6mm;
+}
+.report-band-left {
+  background: var(--yellow);
+  border-right: 0.7mm solid #111;
+}
+.report-band-right { background: #39a8df; }
+.top-kpis {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14mm;
+  margin-top: 3mm;
+}
+.kpi-title, .section-title { font-weight: 700; }
+.kpi-title {
+  color: #4156eb;
+  text-align: center;
+  font-size: 4.7mm;
+  margin-bottom: 0.8mm;
+}
+.kpi-value { text-align: center; font-size: 6.7mm; font-weight: 700; }
+.kpi-value.green { color: var(--green); }
+.kpi-value.purple { color: var(--purple); }
+.section-title.blue {
+  color: #2f73b7;
+  font-size: 4.6mm;
+  text-align: center;
+}
+.section-title.purple {
+  color: var(--purple);
+  text-align: center;
+  font-size: 4.6mm;
+  margin-bottom: 1.6mm;
+}
+.section-title.left { text-align: left; }
+.report-grid-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8mm;
+  margin-top: 3mm;
+  align-items: start;
+}
+.table-total {
+  text-align: center;
+  font-size: 6mm;
+  font-weight: 700;
+  margin: 0.8mm 0 1mm;
+  min-height: 7mm;
+}
+.table-total.green { color: var(--green); }
+.table-total.purple { color: var(--purple); }
+.table-total.subtle { color: transparent; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 3.45mm;
+}
+th, td {
+  border: 0.3mm solid var(--line);
+  padding: 1.2mm 1.6mm;
+}
+th {
+  background: #f6f6f6;
+  text-align: center;
+  font-weight: 700;
+}
+td:last-child { text-align: center; width: 32%; }
+.chart-block { margin-top: 4mm; }
+.modalites-block { margin-top: 4mm; }
+.modalites-layout, .partner-layout {
+  display: grid;
+  grid-template-columns: 60mm 1fr;
+  align-items: center;
+  gap: 10mm;
+}
+.modalites-chart-wrap {
+  width: 60mm;
+  height: 60mm;
+  margin-left: 8mm;
+}
+.partner-chart-wrap {
+  width: 72mm;
+  height: 72mm;
+  margin-left: 8mm;
+}
+.chart-wrap-large {
+  width: 166mm;
+  height: 60mm;
+  margin: 0 auto;
+}
+.modalites-chart-wrap canvas,
+.partner-chart-wrap canvas,
+.chart-wrap-large canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+.html-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 5mm;
+  min-width: 0;
+}
+.html-legend .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 3.2mm;
+  font-size: 4.2mm;
+  line-height: 1.18;
+  color: #555;
+}
+.html-legend.interactive .legend-item { cursor: pointer; }
+.html-legend .legend-swatch {
+  width: 7.5mm;
+  height: 4.8mm;
+  border: 0.2mm solid rgba(0,0,0,.08);
+  flex: 0 0 auto;
+}
+.html-legend .legend-label {
+  display: inline-block;
+}
+.html-legend .legend-item.is-hidden .legend-label {
+  text-decoration: line-through;
+  opacity: .65;
+}
+.partner-block { margin-top: 5mm; }
+.thematiques-block { margin-top: 2mm; }
+.bottom-summaries {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14mm;
+  margin-top: 5mm;
+  align-items: start;
+}
+.year-total {
+  margin-top: 3mm;
+  background: #f3c316;
+  color: #8a6b00;
+  font-size: 6mm;
+  font-weight: 700;
+  text-align: center;
+  padding: 1mm 2mm;
+  width: 38mm;
+}
+.year-box-title {
+  text-align: center;
+  background: #ddd;
+  border: 0.3mm solid #666;
+  border-bottom: none;
+  padding: 1.8mm;
+  font-weight: 700;
+  font-size: 3.9mm;
+}
+.zero-empty {
+  background: var(--zero-bg);
+  color: transparent;
+}
+.footer-logo {
+  position: absolute;
+  right: 8mm;
+  bottom: 6mm;
+  width: 36mm;
+  height: auto;
+}
+.footer-logo.small { width: 34mm; }
+.footer-number {
+  position: absolute;
+  left: 50%;
+  bottom: 5mm;
+  transform: translateX(-50%);
+  font-size: 3.4mm;
+  color: #555;
+}
+.exporting .report-page {
+  box-shadow: none;
+  border-radius: 0;
+}
+@media (max-width: 1100px) {
+  .report-page { width: 100%; height: auto; min-height: auto; }
+  .form-grid-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 850px) {
+  .form-grid-top,
+  .form-grid-main,
+  .report-grid-two,
+  .top-kpis,
+  .bottom-summaries,
+  .report-band,
+  .modalites-layout,
+  .partner-layout {
+    grid-template-columns: 1fr;
+  }
+  .app-header { flex-direction: column; }
+  .modalites-chart-wrap, .partner-chart-wrap, .chart-wrap-large {
+    width: 100%;
+    height: 300px;
+    margin-left: 0;
+  }
+}
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+@media print {
+  html, body {
+    width: 210mm;
+    background: #fff;
+  }
+  .no-print { display: none !important; }
+  .app-shell { width: auto; margin: 0; }
+  .print-area { gap: 0; }
+  .report-page {
+    width: 210mm;
+    height: 297mm;
+    min-height: 297mm;
+    margin: 0;
+    box-shadow: none;
+    border-radius: 0;
+    page-break-after: always;
+    break-after: page;
+  }
+  .report-page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+}
+
+
+/* Verrouillage export PDF : reprend la base validée et interdit les retours en arrière */
+.pdf-export, .pdf-export body {
+  background: #fff !important;
+}
+.pdf-export .print-area {
+  gap: 0 !important;
+}
+.pdf-export .report-page {
+  width: 210mm !important;
+  height: 297mm !important;
+  min-height: 297mm !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;
+  page-break-after: always !important;
+  break-after: page !important;
+}
+.pdf-export .report-page:last-child {
+  page-break-after: auto !important;
+  break-after: auto !important;
+}
+.pdf-export .report-band {
+  display: grid !important;
+  grid-template-columns: 1.15fr .85fr !important;
+}
+.pdf-export .top-kpis,
+.pdf-export .report-grid-two,
+.pdf-export .bottom-summaries {
+  display: grid !important;
+}
+.pdf-export .top-kpis {
+  grid-template-columns: 1fr 1fr !important;
+}
+.pdf-export .report-grid-two,
+.pdf-export .bottom-summaries {
+  grid-template-columns: 1fr 1fr !important;
+}
+.pdf-export .modalites-layout,
+.pdf-export .partner-layout {
+  display: grid !important;
+  align-items: center !important;
+}
+.pdf-export .modalites-layout {
+  grid-template-columns: 60mm 1fr !important;
+  gap: 10mm !important;
+}
+.pdf-export .partner-layout {
+  grid-template-columns: 72mm 1fr !important;
+  gap: 10mm !important;
+}
+.pdf-export .modalites-chart-wrap {
+  width: 60mm !important;
+  height: 60mm !important;
+  margin-left: 8mm !important;
+}
+.pdf-export .partner-chart-wrap {
+  width: 72mm !important;
+  height: 72mm !important;
+  margin-left: 8mm !important;
+}
+.pdf-export .chart-wrap-large {
+  width: 166mm !important;
+  height: 60mm !important;
+}
+.pdf-export .html-legend {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 5mm !important;
+}
+.pdf-export .html-legend .legend-item {
+  break-inside: avoid !important;
+}
+.pdf-export .footer-logo {
+  width: 36mm !important;
+  right: 8mm !important;
+  bottom: 6mm !important;
+}
+.pdf-export .footer-logo.small {
+  width: 34mm !important;
+}
+.pdf-export .footer-number {
+  bottom: 5mm !important;
+}
