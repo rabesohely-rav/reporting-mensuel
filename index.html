@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reporting mensuel France Services</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header no-print">
+      <div>
+        <h1>Reporting mensuel France Services</h1>
+        <p>Page 1 : formulaire — Pages 2 et 3 : reporting imprimable</p>
+      </div>
+      <div class="header-actions">
+        <button type="button" class="secondary" id="btnSample">Exemple</button>
+        <button type="button" class="success" id="btnSaveLocal">Sauvegarder</button>
+        <button type="button" class="secondary" id="btnLoadLocal">Recharger</button>
+        <button type="button" id="btnPrint">Imprimer / PDF</button>
+      </div>
+    </header>
+
+    <section class="page page-form no-print" id="formPage">
+      <div class="card intro-card">
+        <h2>Formulaire à remplir pour alimenter les pages 2 et 3</h2>
+        <p>
+          <span>1. Renseigner le nom de la France Services.</span>
+          <span>2. Renseigner la période.</span>
+          <span>3. Renseigner le nombre d'accompagnements.</span>
+          <span>4. Copier-coller les données dans les zones prévues.</span>
+          <span>5. Cliquer sur Imprimer / PDF.</span>
+        </p>
+      </div>
+
+      <div class="form-grid-top">
+        <div class="card">
+          <label for="nomFs">Nom de la France Services</label>
+          <input id="nomFs" type="text" placeholder="ALZONNE" />
+        </div>
+
+        <div class="card">
+          <label for="periodeLabel">Période</label>
+          <input id="periodeLabel" type="text" placeholder="Janvier 2026" />
+        </div>
+
+        <div class="card">
+          <label for="nombreAccompagnements">Nombre d'accompagnements</label>
+          <input id="nombreAccompagnements" type="number" min="0" step="1" value="0" />
+        </div>
+
+        <div class="card">
+          <label for="storageSlot">Nom de sauvegarde</label>
+          <input id="storageSlot" type="text" placeholder="ALZONNE - Janvier 2026" />
+        </div>
+      </div>
+
+      <div class="form-grid-main">
+        <div class="card">
+          <h3>Commune de l’usager</h3>
+          <p>Format : libellé puis valeur, répétés.</p>
+          <textarea id="inputCommunesUsagers"></textarea>
+          <div class="status" id="statusCommunesUsagers">En attente</div>
+        </div>
+
+        <div class="card">
+          <h3>Visites lors des permanences</h3>
+          <p>Format : libellé puis valeur, répétés.</p>
+          <textarea id="inputPermanences"></textarea>
+          <div class="status" id="statusPermanences">En attente</div>
+        </div>
+
+        <div class="card">
+          <h3>Modalité d’accès</h3>
+          <p>Format : libellé puis valeur, répétés.</p>
+          <textarea id="inputModalites"></textarea>
+          <div class="status" id="statusModalites">En attente</div>
+        </div>
+
+        <div class="card">
+          <h3>Demande par partenaire national</h3>
+          <p>Format : libellé puis valeur, répétés.</p>
+          <textarea id="inputPartenaires"></textarea>
+          <div class="status" id="statusPartenaires">En attente</div>
+        </div>
+
+        <div class="card full-width">
+          <h3>Top 5 des thématiques</h3>
+          <p>Format : libellé puis valeur, répétés.</p>
+          <textarea id="inputThematiques"></textarea>
+          <div class="status" id="statusThematiques">En attente</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Nombre de demandes dans l’année</h3>
+        <p>12 lignes modifiables. La somme alimente automatiquement « Statistiques de l'année en cours ».</p>
+        <div class="year-table-wrap">
+          <table class="editor-table" id="editorDemandesTable">
+            <thead>
+              <tr>
+                <th>Mois</th>
+                <th>Demandes</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card save-feedback" id="saveFeedback">Aucune sauvegarde effectuée.</div>
+    </section>
+
+    <section class="print-area">
+      <section class="report-page" id="reportPage1">
+        <div class="report-header">
+          <img class="logo-fs" src="./assets/logo-france-services.png" alt="Logo France Services" />
+          <div class="report-title">
+            <div>STATISTIQUES MENSUELLES</div>
+            <div>FRANCE SERVICES</div>
+          </div>
+          <div></div>
+        </div>
+
+        <div class="report-band">
+          <div class="report-band-left" id="displayNomFs">ALZONNE</div>
+          <div class="report-band-right" id="displayPeriode">Janvier 2026</div>
+        </div>
+
+        <div class="top-kpis">
+          <div class="kpi-block">
+            <div class="kpi-title">Nombre d'accompagnements</div>
+            <div class="kpi-value green" id="displayNombreAccompagnements">0</div>
+          </div>
+          <div class="kpi-block">
+            <div class="kpi-title">Visites lors des permanences</div>
+            <div class="kpi-value purple" id="displayNombrePermanences">0</div>
+          </div>
+        </div>
+
+        <div class="report-grid-two">
+          <div>
+            <div class="section-title blue">Commune de l'usager</div>
+            <div class="table-total green" id="displayTotalCommunesUsagers">0</div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Commune</th>
+                  <th>Nombre d'usagers</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyCommunesUsagers"></tbody>
+            </table>
+          </div>
+
+          <div>
+            <div class="section-title blue">Commune de permanence</div>
+            <div class="table-total purple subtle">&nbsp;</div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Commune de permanence</th>
+                  <th>Nombre de demandes</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyPermanences"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="chart-block compact">
+          <div class="section-title purple">Modalité d'accès</div>
+          <div class="chart-wrap-small modalites-layout">
+            <div class="modalites-canvas-wrap"><canvas id="chartModalites"></canvas></div>
+            <div id="modalitesLegend" class="chart-legend chart-legend-right" aria-label="Légende Modalité d'accès"></div>
+          </div>
+        </div>
+
+        <div class="footer-number">2</div>
+        <img class="logo-agglo footer-logo small" src="./assets/logo-carcassonne-agglo.png" alt="Logo Carcassonne Agglo" />
+      </section>
+
+      <section class="report-page" id="reportPage2">
+        <div class="report-header">
+          <img class="logo-fs" src="./assets/logo-france-services.png" alt="Logo France Services" />
+          <div class="report-title">
+            <div>STATISTIQUES MENSUELLES</div>
+            <div>FRANCE SERVICES</div>
+          </div>
+          <div></div>
+        </div>
+
+        <div class="chart-block large partner-block">
+          <div class="section-title purple">Demande par partenaire national</div>
+          <div class="chart-wrap-medium">
+            <canvas id="chartPartenaires"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-block large thematiques-block">
+          <div class="section-title purple">Top 5 des thématiques</div>
+          <div class="chart-wrap-large">
+            <canvas id="chartThematiques"></canvas>
+          </div>
+        </div>
+
+        <div class="bottom-summaries">
+          <div>
+            <div class="section-title blue left">Statistiques de l'année en cours</div>
+            <div class="year-total" id="displayTotalAnnee">0</div>
+          </div>
+
+          <div>
+            <div class="year-box-title">Nombre de demandes en <span id="displayYear">2026</span></div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Mois</th>
+                  <th>Demandes</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyDemandesAnnee"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="footer-number">3</div>
+        <img class="logo-agglo footer-logo" src="./assets/logo-carcassonne-agglo.png" alt="Logo Carcassonne Agglo" />
+      </section>
+    </section>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
